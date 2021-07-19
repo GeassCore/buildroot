@@ -1,0 +1,4 @@
+config BR2_PACKAGE_GO
+	bool "go support"
+	default y
+	depends on BR2_PACKAGE_HOST_GO_BOOTSTRAP_ARCH_SUPPORTS

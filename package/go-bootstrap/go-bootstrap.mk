@@ -45,4 +45,4 @@ define HOST_GO_BOOTSTRAP_INSTALL_CMDS
 	cp -a $(@D)/src $(HOST_GO_BOOTSTRAP_ROOT)/
 endef
 
-$(eval $(host-generic-package))
+$(eval $(host-golang-package))

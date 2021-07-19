@@ -18,6 +18,9 @@ HOST_GO_HOST_CACHE = $(HOST_DIR)/usr/share/host-go-cache
 HOST_GO_ROOT = $(HOST_DIR)/lib/go
 HOST_GO_TARGET_CACHE = $(HOST_DIR)/usr/share/go-cache
 
+TARGET_GO_HOST= $(TARGET_DIR)/lib/go
+TARGET_GO_HOST_CACHE = $(TARGET_DIR)/usr/share/go-cache
+
 # We pass an empty GOBIN, otherwise "go install: cannot install
 # cross-compiled binaries when GOBIN is set"
 HOST_GO_COMMON_ENV = \
@@ -65,6 +68,8 @@ else ifeq ($(BR2_mips64el),y)
 GO_GOARCH = mips64le
 else ifeq ($(BR2_s390x),y)
 GO_GOARCH = s390x
+else ifeq ($(BR2_RISCV_64),y)
+GO_GOARCH = riscv64
 endif
 
 # For the convienience of target packages.
@@ -135,6 +140,22 @@ define HOST_GO_BUILD_CMDS
 		$(HOST_GO_MAKE_ENV) ./make.bash $(if $(VERBOSE),-v)
 endef
 
+TARGET_GO_MAKE_ENV = \
+	GO111MODULE=off \
+	GOCACHE=$(TARGET_GO_HOST_CACHE) \
+	GOROOT_BOOTSTRAP=$(HOST_GO_BOOTSTRAP_ROOT) \
+	GOROOT_FINAL=$(TARGET_GO_HOST) \
+	GOROOT="$(@D)" \
+	GOBIN="$(@D)/bin" \
+	GOOS=linux \
+	CGO_ENABLED=0 \
+	GOARCH=$(GO_GOARCH)
+
+define GO_BUILD_CMDS
+	cd $(@D)/src && \
+		$(TARGET_GO_MAKE_ENV) ./make.bash $(if $(VERBOSE),-v)
+endef
+
 define HOST_GO_INSTALL_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/bin/go $(HOST_GO_ROOT)/bin/go
 	$(INSTALL) -D -m 0755 $(@D)/bin/gofmt $(HOST_GO_ROOT)/bin/gofmt
@@ -157,4 +178,27 @@ define HOST_GO_INSTALL_CMDS
 	find $(HOST_GO_ROOT) -type f -exec touch -r $(@D)/bin/go {} \;
 endef
 
-$(eval $(host-generic-package))
+define GO_INSTALL_TARGET_CMDS
+	$(INSTALL) -D -m 0755 $(@D)/bin/go $(TARGET_GO_HOST)/bin/go
+	$(INSTALL) -D -m 0755 $(@D)/bin/gofmt $(TARGET_GO_HOST)/bin/gofmt
+
+	ln -sf ../lib/go/bin/go $(TARGET_DIR)/bin/
+	ln -sf ../lib/go/bin/gofmt $(TARGET_DIR)/bin/
+
+	cp -a $(@D)/lib $(TARGET_GO_HOST)/
+
+	mkdir -p $(TARGET_GO_HOST)/pkg
+	cp -a $(@D)/pkg/include $(@D)/pkg/linux_* $(TARGET_GO_HOST)/pkg/
+	cp -a $(@D)/pkg/tool $(TARGET_GO_HOST)/pkg/
+
+	# There is a known issue which requires the go sources to be installed
+	# https://golang.org/issue/2775
+	cp -a $(@D)/src $(TARGET_GO_HOST)/
+
+	# Set all file timestamps to prevent the go compiler from rebuilding any
+	# built in packages when programs are built.
+	#find $(TARGET_GO_HOST) -type f -exec touch -r $(@D)/bin/go {} \;
+endef
+
+$(eval $(generic-package))
+# $(eval $(host-generic-package))

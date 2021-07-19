@@ -1,5 +1,10 @@
-config BR2_PACKAGE_HOST_GO_BOOTSTRAP_ARCH_SUPPORTS
+config BR2_PACKAGE_GO_BOOTSTRAP
 	bool
+	default y
+	depends on BR2_PACKAGE_HOST_GO_BOOTSTRAP_ARCH_SUPPORTS
+
+config BR2_PACKAGE_HOST_GO_BOOTSTRAP_ARCH_SUPPORTS
+	bool "host go bootstrap arch"
 	# See src/cmd/dist/unix.c for the list of support
 	# architectures
 	default y if BR2_HOSTARCH = "x86"
