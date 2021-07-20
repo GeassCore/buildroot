@@ -7,18 +7,3 @@ config BR2_PACKAGE_GO_CI
 
 comment "go ci need host go bootstrap supports"
 	depends on !BR2_RISCV_64
-
-config BR2_PACKAGE_PRE_GO
-	bool
-	default y
-	depends on BR2_PACKAGE_GO_CI
-	help
-	  base on buildroot GO CI test
-
-config BR2_PACKAGE_GOBOOTSTRAP_TAR
-	bool
-	default y
-	depends on BR2_PACKAGE_GO_CI
-	depends on BR2_PACKAGE_HOST_GO_BOOTSTRAP_ARCH_SUPPORTS
-	help
-	  base on buildroot GO CI test
