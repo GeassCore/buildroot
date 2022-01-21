@@ -99,5 +99,8 @@ menu "Host utilities"
 	source "package/xorriso/Config.in.host"
 	source "package/zip/Config.in.host"
 	source "package/zstd/Config.in.host"
-
+	source "package/ocaml/Config.in.host"
+	source "package/ocaml-dune/Config.in.host"
+	source "package/ocaml-menhir/Config.in.host"
+	source "package/herdtools7/Config.in.host"
 endmenu
