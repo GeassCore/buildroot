@@ -1,0 +1,10 @@
+config BR2_PACKAGE_HOST_OCAML_FIND
+	bool "host ocaml-find"
+	depends on BR2_PACKAGE_HOST_OCAML
+	help
+	  Ocaml Language find Package.
+
+	  https://github.com/ocaml/ocamlfind
+
+comment "ocaml-find needs ocaml"
+	depends on  !BR2_PACKAGE_HOST_OCAML

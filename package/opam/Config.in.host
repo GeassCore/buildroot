@@ -1,0 +1,10 @@
+config BR2_PACKAGE_HOST_OPAM
+	bool "host opam"
+	depends on BR2_PACKAGE_HOST_OCAML
+	help
+	  Ocaml Language opam Package.
+
+	  https://github.com/ocaml/opam
+
+comment "opam needs ocaml"
+	depends on  !BR2_PACKAGE_HOST_OCAML
