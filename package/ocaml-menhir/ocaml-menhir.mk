@@ -15,7 +15,7 @@ define HOST_OCAML_MENHIR_BUILD_CMDS
 endef
 
 define HOST_OCAML_MENHIR_INSTALL_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) prefix=$(HOST_DIR) install
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) install --prefix=$(HOST_DIR)
 endef
 
 $(eval $(host-generic-package))

@@ -20,7 +20,7 @@ define HOST_OCAML_FIND_BUILD_CMDS
 endef
 
 define HOST_OCAML_FIND_INSTALL_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) prefix=$(HOST_DIR) install
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) --prefix=$(HOST_DIR) install
 endef
 
 $(eval $(host-generic-package))

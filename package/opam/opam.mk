@@ -14,11 +14,12 @@ OPAM_LICENSE_FILES = LICENSE.md
 # endef
 
 define HOST_OPAM_BUILD_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)  cold CONFIGURE_ARGS="--prefix ~/local"
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)  lib-ext
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)  cold DESTDIR=$(HOST_DIR)
 endef
 
 define HOST_OPAM_INSTALL_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) prefix=$(HOST_DIR)  cold-install
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) cold-install DESTDIR=$(HOST_DIR)
 endef
 
 $(eval $(host-generic-package))

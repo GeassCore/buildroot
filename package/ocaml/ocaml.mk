@@ -14,15 +14,15 @@ HOST_OCAML_DEPENDENCIES = \
 	toolchain
 
 define HOST_OCAML_CONFIGURE_CMDS
-	(cd $(@D); $(HOST_CONFIGURE_OPTS) ./configure)
+	(cd $(@D); $(HOST_CONFIGURE_OPTS) ./configure --prefix=$(HOST_DIR))
 endef
 
 define HOST_OCAML_BUILD_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) world.opt
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)
 endef
 
 define HOST_OCAML_INSTALL_CMDS
-	$(HOST_MAKE_ENV) $(MAKE) -C $(@D) prefix=$(HOST_DIR) install
+	$(HOST_MAKE_ENV) $(MAKE) -C $(@D)  install
 endef
 
 $(eval $(host-generic-package))
