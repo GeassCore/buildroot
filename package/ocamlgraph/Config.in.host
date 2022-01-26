@@ -1,0 +1,11 @@
+config BR2_PACKAGE_HOST_OCAMLGRAPH
+	bool "host ocamlgraph"
+	depends on BR2_PACKAGE_HOST_OCAML
+	help
+	  Ocaml Language Ocamlgraph Package.
+
+	  http://ocamlgraph.lri.fr/index.en.html
+	  https://github.com/backtracking/ocamlgraph
+
+comment "ocamlgraph needs ocaml"
+	depends on  !BR2_PACKAGE_HOST_OCAML
