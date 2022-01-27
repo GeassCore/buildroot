@@ -10,8 +10,7 @@ OCAML_SITE = https://caml.inria.fr/pub/distrib/ocaml-4.13
 OCAML_LICENSE = LGPL-2.1
 OCAML_LICENSE_FILES = LICENSE
 
-HOST_OCAML_DEPENDENCIES = \
-	toolchain
+HOST_OCAML_DEPENDENCIES = toolchain
 
 define HOST_OCAML_CONFIGURE_CMDS
 	(cd $(@D); $(HOST_CONFIGURE_OPTS) ./configure --prefix=$(HOST_DIR))

@@ -151,6 +151,7 @@ menu "Debugging, profiling and benchmark"
 	source "package/valgrind/Config.in"
 	source "package/vmtouch/Config.in"
 	source "package/whetstone/Config.in"
+	source "package/litmus-test/Config.in"
 endmenu
 
 menu "Development tools"
