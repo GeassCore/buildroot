@@ -5,8 +5,7 @@
 ################################################################################
 
 OCAML_VERSION = 4.13.0
-OCAML_SOURCE = ocaml-$(OCAML_VERSION).tar.xz
-OCAML_SITE = https://caml.inria.fr/pub/distrib/ocaml-4.13
+OCAML_SITE = $(call github,ocaml,ocaml,$(OCAML_VERSION))
 OCAML_LICENSE = LGPL-2.1
 OCAML_LICENSE_FILES = LICENSE
 

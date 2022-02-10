@@ -6,7 +6,7 @@ config BR2_PACKAGE_LITMUS_TEST
 
 	  https://github.com/litmus-tests/litmus-tests-riscv
 
-comment " litmus test needs herdtools7"
+comment "litmus test needs herdtools7"
 	depends on  !BR2_PACKAGE_HOST_HERDTOOLS7
 
 config BR2_PACKAGE_KLITMUS_TEST
@@ -15,5 +15,5 @@ config BR2_PACKAGE_KLITMUS_TEST
 	help
 	  The tests can also be used for kernel memroy order test.
 
-comment " litmus test needs herdtools7"
+comment "litmus test needs herdtools7"
 	depends on  !BR2_PACKAGE_HOST_HERDTOOLS7
