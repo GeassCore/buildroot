@@ -1,0 +1,6 @@
+server_ip=192.168.1.34
+local_ip=192.168.1.100
+tftpenv=setenv ipaddr ${local_ip};setenv serverip ${server_ip};
+tftpimage=tftp ${kernel_addr_r} unmatched/Image;tftp ${fdt_addr_r} unmatched/hifive-unmatched-a00.dtb;
+tftparg=setenv bootargs console=ttySIF0,115200 rootwait init=/sbin/init root=/dev/nfs rw nfsroot=${server_ip}:/opt/nfs_root,v3,tcp,nolock ip=${local_ip}
+tftpboot=run tftpenv;run tftpimage;run tftparg;booti ${kernel_addr_r} - ${fdt_addr_r};
