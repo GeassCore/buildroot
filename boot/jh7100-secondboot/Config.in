@@ -1,9 +1,9 @@
-config BR2_TARGET_BEAGLEV_SECONDBOOT
-	bool "beaglev-secondboot"
+config BR2_TARGET_JH7100_SECONDBOOT
+	bool "JH7100-secondboot"
 	depends on BR2_riscv
 	depends on BR2_HOSTARCH = "x86_64" # host-riscv64-elf-toolchain
 	help
 	  This package builds the SecondBoot firmware used on the
-	  BeagleV platform.
+	  JH7100 platform.
 
 	  https://github.com/starfive-tech/beagle_secondBoot

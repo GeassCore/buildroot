@@ -1,0 +1,9 @@
+config BR2_TARGET_JH7100_DDRINIT
+	bool "jh7100-ddrinit"
+	depends on BR2_riscv
+	depends on BR2_HOSTARCH = "x86_64" # host-riscv64-elf-toolchain
+	help
+	  This package builds the DDRinit firmware used on the JH7100
+	  platform.
+
+	  https://github.com/starfive-tech/jh7100_ddrinit
